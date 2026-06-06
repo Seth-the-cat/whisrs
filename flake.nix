@@ -37,7 +37,7 @@
 
 
           WHISPER_CUDA = "1";
-          CUDA_PATH = "${cudaPkgs.cudatoolkit}";
+          CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
           LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
 
           postInstall = ''
