@@ -30,6 +30,7 @@
           cudaPackages.cudatoolkit
           cudaPackages.cuda_cudart
           cudaPackages.libcublas
+          linuxPackages.nvidia_x11 
         ];
       in
       {
@@ -49,6 +50,7 @@
             export LIBRARY_PATH="${pkgs.cudaPackages.cudatoolkit}/lib:${pkgs.cudaPackages.cuda_cudart}/lib:${pkgs.cudaPackages.libcublas}/lib:$LIBRARY_PATH"
             export LD_LIBRARY_PATH="${pkgs.cudaPackages.cudatoolkit}/lib:${pkgs.cudaPackages.cuda_cudart}/lib:$LD_LIBRARY_PATH"
             export CUDA_TOOLKIT_ROOT_DIR="${pkgs.cudaPackages.cudatoolkit}"
+            export NIX_LDFLAGS = "-L${pkgs.linuxPackages.nvidia_x11}/lib";
           '';
 
           postInstall = ''
