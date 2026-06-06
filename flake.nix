@@ -40,11 +40,16 @@
           cargoLock.lockFile = ./Cargo.lock;
 
           inherit nativeBuildInputs buildInputs;
-
-
+          
           WHISPER_CUDA = "1";
           CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
           LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+          
+          preBuild = ''
+            export LIBRARY_PATH="${pkgs.cudaPackages.cudatoolkit}/lib:${pkgs.cudaPackages.cuda_cudart}/lib:${pkgs.cudaPackages.libcublas}/lib:$LIBRARY_PATH"
+            export LD_LIBRARY_PATH="${pkgs.cudaPackages.cudatoolkit}/lib:${pkgs.cudaPackages.cuda_cudart}/lib:$LD_LIBRARY_PATH"
+            export CUDA_TOOLKIT_ROOT_DIR="${pkgs.cudaPackages.cudatoolkit}"
+          '';
 
           postInstall = ''
             install -Dm644 contrib/whisrs.1 $out/share/man/man1/whisrs.1
