@@ -32,6 +32,11 @@
 
           inherit nativeBuildInputs buildInputs;
 
+
+          WHISPER_CUDA = "1";
+          CUDA_PATH = "${cudaPkgs.cudatoolkit}";
+          LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+
           postInstall = ''
             install -Dm644 contrib/whisrs.1 $out/share/man/man1/whisrs.1
             install -Dm644 contrib/whisrsd.1 $out/share/man/man1/whisrsd.1
