@@ -21,6 +21,9 @@
         buildInputs = with pkgs; [
           alsa-lib
           libxkbcommon
+          cudaPackages.cudatoolkit
+          cudaPackages.cuda_cudart
+          cudaPackages.libcublas
         ];
       in
       {
